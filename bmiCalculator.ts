@@ -44,6 +44,7 @@ const calculateBmi = (height: number, weight: number): string => {
     if(bmi>=40){
         return 'Obese (Class III)'
     }
+    return "Undefined input"
 }
 
 try {
