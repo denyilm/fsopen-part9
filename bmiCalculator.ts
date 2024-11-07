@@ -1,9 +1,9 @@
-interface BodyParams {
+export interface BodyParams {
     height: number;
     weight: number;
 }
 
-const parseArguments = (args: string[]): BodyParams => {
+export const parseArguments = (args: string[]): BodyParams => {
     if (args.length < 4) throw new Error('Not enough arguments');
     if (args.length > 4) throw new Error('Too many arguments');
   
@@ -17,7 +17,7 @@ const parseArguments = (args: string[]): BodyParams => {
     }
   }
 
-const calculateBmi = (height: number, weight: number): string => {
+export const calculateBmi = (height: number, weight: number): string => {
     let heightInM = height/100
     let bmi = weight/(heightInM*heightInM)
     if(bmi<16){
@@ -47,13 +47,16 @@ const calculateBmi = (height: number, weight: number): string => {
     return "Undefined input"
 }
 
-try {
-    const { height, weight } = parseArguments(process.argv);
-    console.log(calculateBmi(height, weight))
-} catch (error: unknown) {
-    let errorMessage = 'Something bad happened.'
-    if (error instanceof Error) {
-        errorMessage += ' Error: ' + error.message;
+
+if (require.main === module) {
+    try {
+        const { height, weight } = parseArguments(process.argv);
+        console.log(calculateBmi(height, weight))
+    } catch (error: unknown) {
+        let errorMessage = 'Something bad happened.'
+        if (error instanceof Error) {
+            errorMessage += ' Error: ' + error.message;
+        }
+        console.log(errorMessage);
     }
-    console.log(errorMessage);
 }
