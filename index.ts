@@ -1,4 +1,4 @@
-import express from 'express'
+import express from 'express';
 import { calculateBmi } from './bmiCalculator';
 const app = express();
 
@@ -9,8 +9,8 @@ app.get('/hello', (_req, res) => {
 app.get('/bmi', (_req, res) => {
   try {
     if (!isNaN(Number(_req.query.height)) && !isNaN(Number(_req.query.weight))) {
-        const height:number = Number(_req.query.height)
-        const weight:number = Number(_req.query.weight)
+        const height:number = Number(_req.query.height);
+        const weight:number = Number(_req.query.weight);
         res.json({
             height,
             weight,
@@ -20,6 +20,7 @@ app.get('/bmi', (_req, res) => {
         res.status(500).json({ error: 'Malformatted parameters'});
     }
   } catch (error) {
+    console.log(error);
     res.status(500).json({ error: 'Malformatted parameters'});
   }
   
